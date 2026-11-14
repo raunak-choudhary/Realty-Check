@@ -2,7 +2,7 @@
 name = "reality-check"
 version = "0.1.0"
 requires-python = ">=3.11"
-dependencies = ["deepagents", "fastapi", "uvicorn", "httpx", "requests", "pillow", "pyzipper", "python-dotenv", "pytest"]
+dependencies = ["deepagents", "fastapi", "uvicorn", "httpx", "requests", "pillow", "pyzipper", "python-dotenv", "pytest", "numpy", "tifffile"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
