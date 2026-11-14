@@ -1,0 +1,17 @@
+{
+  "url": "https://rentnest.example/houston-tx/the-calloway-on-brenner",
+  "title": "The Calloway on Brenner - 4718 Brenner St, Houston, TX | RentNest",
+  "address_text": "4718 Brenner St, Houston, TX 77007",
+  "jsonld": [
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Texas"},
+      {"@type": "ListItem", "position": 2, "name": "Houston"}]},
+    {"@context": "https://schema.org", "@type": "ApartmentComplex", "name": "The Calloway on Brenner",
+     "address": {"@type": "PostalAddress", "streetAddress": "4718 Brenner St", "addressLocality": "Houston",
+                 "addressRegion": "TX", "postalCode": "77007"},
+     "numberOfAccommodationUnits": 100,
+     "amenityFeature": [
+       {"@type": "LocationFeatureSpecification", "name": "Pool", "value": true},
+       {"@type": "LocationFeatureSpecification", "name": "Fitness Center", "value": true}]}
+  ]
+}

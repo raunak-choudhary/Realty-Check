@@ -1,0 +1,26 @@
+{
+  "url": "https://homeharbor.example/rental/2214-wexford-ln-austin-tx-78704/71230981",
+  "title": "2214 Wexford Ln, Austin, TX 78704 - House for Rent | HomeHarbor",
+  "address_text": "2214 Wexford Ln, Austin, TX 78704",
+  "jsonld": [
+    {"@context": "https://schema.org", "@type": "SingleFamilyResidence",
+     "name": "2214 Wexford Ln, Austin, TX 78704",
+     "address": {"@type": "PostalAddress", "streetAddress": "2214 Wexford Ln", "addressLocality": "Austin",
+                 "addressRegion": "TX", "postalCode": "78704"},
+     "numberOfRooms": 3, "numberOfBedrooms": 3, "numberOfBathroomsTotal": 2,
+     "floorSize": {"@type": "QuantitativeValue", "value": "1,450", "unitCode": "FTK"},
+     "yearBuilt": 1998,
+     "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": "Fenced Yard", "value": true}]},
+    {"@context": "https://schema.org", "@type": "ItemList", "name": "Similar homes for rent nearby",
+     "itemListElement": [
+       {"@type": "ListItem", "position": 1, "item": {"@type": "SingleFamilyResidence",
+        "address": {"@type": "PostalAddress", "streetAddress": "1406 Alder Ct"},
+        "numberOfBedrooms": 2, "numberOfBathroomsTotal": 1, "floorSize": {"@type": "QuantitativeValue", "value": 980}}},
+       {"@type": "ListItem", "position": 2, "item": {"@type": "SingleFamilyResidence",
+        "address": {"@type": "PostalAddress", "streetAddress": "3007 Pinehurst Dr"},
+        "numberOfBedrooms": 4, "numberOfBathroomsTotal": 3, "floorSize": {"@type": "QuantitativeValue", "value": 2210}}}]},
+    {"@context": "https://schema.org", "@type": "SingleFamilyResidence",
+     "address": {"@type": "PostalAddress", "streetAddress": "618 Mirabel Ave", "addressLocality": "Austin"},
+     "numberOfBedrooms": 1, "numberOfBathroomsTotal": 1.5}
+  ]
+}

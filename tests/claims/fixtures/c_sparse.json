@@ -1,0 +1,8 @@
+{
+  "url": "https://homefinderhub.example/listing/88213",
+  "title": "Luxury Living at 960 Orchard Hollow Rd | HomeFinderHub",
+  "address_text": "960 Orchard Hollow Rd, Houston, TX 77024",
+  "jsonld": [
+    {"@context": "https://schema.org", "@type": "Organization", "name": "HomeFinderHub", "url": "https://homefinderhub.example"}
+  ]
+}
