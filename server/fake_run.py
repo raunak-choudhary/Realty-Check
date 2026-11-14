@@ -1,0 +1,124 @@
+"""Built-in fake runner: a canned event sequence for one listing, used when the harness is missing or RC_FAKE=1.
+
+Same signature as harness.graph.run_check(snapshot, emit) -> done event.
+"""
+from __future__ import annotations
+
+import random
+import time
+from pathlib import Path
+
+from rc_common import cache_dir, evidence
+
+GAP = (0.3, 0.8)  # seconds between events; tests may patch this
+
+
+def _placeholder(name: str, draw_fn) -> str:
+    """Small neutral JPEG under rc_cache/fake/ (never in the repo)."""
+    from PIL import Image, ImageDraw
+
+    path = cache_dir("fake") / name
+    if not path.exists():
+        img = Image.new("RGB", (480, 320), (236, 236, 233))
+        draw_fn(ImageDraw.Draw(img))
+        img.save(path, "JPEG", quality=85)
+    return str(path)
+
+
+def _scan_img(d) -> None:
+    # simple floor plan: one bedroom, a den, living area
+    line = (120, 120, 118)
+    d.rectangle([30, 30, 450, 290], outline=line, width=3)
+    d.line([250, 30, 250, 190], fill=line, width=3)
+    d.line([30, 190, 450, 190], fill=line, width=3)
+    d.line([340, 190, 340, 290], fill=line, width=3)
+    d.text((110, 100), "BEDROOM", fill=line)
+    d.text((330, 100), "LIVING", fill=line)
+    d.text((370, 235), "DEN", fill=line)
+    d.text((150, 235), "KITCHEN", fill=line)
+
+
+def _aerial_img(d) -> None:
+    # oblique-ish block with six floor bands
+    d.rectangle([0, 250, 480, 320], fill=(205, 205, 200))
+    for i in range(6):
+        y = 70 + i * 30
+        d.rectangle([140, y, 340, y + 28], fill=(190, 190, 186), outline=(150, 150, 146))
+    d.text((150, 50), "about 23 m", fill=(110, 110, 108))
+
+
+def _images() -> tuple[str, str]:
+    return _placeholder("scan_plan.jpg", _scan_img), _placeholder("aerial_oblique.jpg", _aerial_img)
+
+
+def run_fake(snapshot: dict, emit) -> dict:
+    scan_path, aerial_path = _images()
+    address = snapshot.get("address_text") or "2111 Austin St, Houston, TX 77002"
+    run_id = snapshot.get("run_id", "fake")
+
+    def say(ev: dict) -> None:
+        time.sleep(random.uniform(*GAP))
+        emit(ev)
+
+    claims = [
+        {"id": "c1", "kind": "bedrooms", "value": 2, "unit": None, "scope": "unit", "label": "Plan E",
+         "quote": "2 Beds", "checkable": True},
+        {"id": "c2", "kind": "stories", "value": 5, "unit": None, "scope": "building", "label": None,
+         "quote": "5-story building", "checkable": True},
+        {"id": "c3", "kind": "area_sqft", "value": 1100, "unit": "sqft", "scope": "unit", "label": "Plan E",
+         "quote": "1,100 sq ft", "checkable": True},
+        {"id": "c4", "kind": "year_built", "value": 2016, "unit": None, "scope": "building", "label": None,
+         "quote": "Built in 2016", "checkable": True},
+        {"id": "c5", "kind": "amenity", "value": "pool", "unit": None, "scope": "building", "label": None,
+         "quote": "Resort-style pool", "checkable": True},
+    ]
+    match = {"status": "matched", "confidence": 0.97, "property_id": "10122224", "name": "Austin Street Lofts",
+             "address": address, "city": "Houston", "state": "TX", "lat": 29.7520, "lon": -95.3700,
+             "record": {"stories": 5, "year_built": 2016, "unit_count": 100, "building_sf": 123456},
+             "floorplans": [{"name": "Plan E", "beds": 2, "baths": 2, "sqft": 1100, "matterport_model_id": "fake01"}],
+             "matterport_model_ids": ["fake01"], "how": "street number + street name + zip"}
+
+    say({"type": "step", "agent": "orchestrator", "text": "Reading the listing page."})
+    say({"type": "step", "agent": "claims", "text": "Pulling out what the page says about the home and building."})
+    say({"type": "claims", "claims": claims})
+    say({"type": "step", "agent": "matcher", "text": "Looking up the building at this address."})
+    say({"type": "match", "match": match})
+    say({"type": "evidence", "evidence": evidence(
+        "record", "ok", "The building record lists 5 stories, built in 2016.",
+        {"stories": 5, "year_built": 2016, "unit_count": 100}, detail="Building record")})
+    say({"type": "step", "agent": "inside", "text": "Walking through the 3D scan of Plan E."})
+    say({"type": "evidence", "evidence": evidence(
+        "scan", "ok", "The 3D scan shows 1 bedroom and a den, about 968 sq ft.",
+        {"bedrooms": 1, "bathrooms": 1, "area_sqft": 968, "room_labels": ["Bedroom", "Den", "Living", "Kitchen"],
+         "label": "1BR W Den"},
+        [{"path": scan_path, "caption": "Floor plan from the 3D scan"}], detail="3D scan room labels")})
+    say({"type": "step", "agent": "outside", "text": "Measuring the roof height from aerial photos."})
+    say({"type": "evidence", "evidence": evidence(
+        "aerial", "ok", "Roof is 23.1 m above ground: about 6 floors.", {"height_m": 23.1, "stories": 6},
+        [{"path": aerial_path, "caption": "Oblique view from the north"}], detail="Aerial height estimate")})
+    say({"type": "step", "agent": "paper", "text": "Checking the county property record."})
+    say({"type": "evidence", "evidence": evidence(
+        "county", "ok", "The county lists 6 stories, built in 2016.", {"stories": 6, "year_built": 2016},
+        detail="County appraisal record")})
+    say({"type": "step", "agent": "judge", "text": "Comparing each claim with what we found."})
+    verdicts = [
+        {"claim_id": "c1", "verdict": "contradicted", "claimed": "2 bedrooms", "found": "1 bedroom + den",
+         "source": "scan", "reason": "The 3D scan labels this plan as one bedroom with a den.", "image": scan_path},
+        {"claim_id": "c2", "verdict": "contradicted", "claimed": "5 stories", "found": "6 stories",
+         "source": "aerial", "reason": "The roof is 23.1 m high, about 6 floors, and the county also lists 6.",
+         "image": aerial_path},
+        {"claim_id": "c3", "verdict": "contradicted", "claimed": "1,100 sq ft", "found": "968 sq ft",
+         "source": "scan", "reason": "The 3D scan measures about 968 sq ft, 12% smaller than listed.", "image": None},
+        {"claim_id": "c4", "verdict": "confirmed", "claimed": "built 2016", "found": "built 2016",
+         "source": "county", "reason": "The county record shows the building was finished in 2016.", "image": None},
+        {"claim_id": "c5", "verdict": "cant_check", "claimed": "resort-style pool", "found": "not checked",
+         "source": "record", "reason": "None of our sources say whether there is a pool.", "image": None},
+    ]
+    for v in verdicts:
+        say({"type": "verdict", "verdict": v})
+    done = {"type": "done", "run_id": run_id,
+            "counts": {"confirmed": 1, "contradicted": 3, "close": 0, "cant_check": 1},
+            "headline": "Listed as 2 bedrooms. The 3D scan shows 1 bedroom and a den.",
+            "report_url": f"/report/{run_id}"}
+    say(done)
+    return done
