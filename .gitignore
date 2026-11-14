@@ -1,0 +1,21 @@
+.env
+.env.*
+.venv/
+__pycache__/
+*.pyc
+# sponsor data and anything derived from it never enters this repo
+data/
+cache/
+runs/
+media/
+*.jsonl
+*.zip
+*.jpg
+*.jpeg
+*.png
+!extension/icons/*.png
+!tests/fixtures/public/**
+iso_cwd/
+vision_cwd/
+.claude/worktrees/
+.playwright-mcp/
