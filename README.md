@@ -23,6 +23,9 @@ and the county.
 
 Built at HackPrinceton Fall 2026 (Nov 13–15).
 
+- [Demo Video on YouTube](https://www.youtube.com/watch?v=lBtpzvgc_eg)
+- [Devpost Submission](https://devpost.com/software/realty-check-kruw17)
+
 ## Architecture
 
 ![Realty Check system architecture](docs/img/system-architecture.png)
@@ -116,3 +119,5 @@ the Matterport SDK and API, the Vexcel API, CoStar property data, county open da
 
 - Rohan Gore
 - Raunak Choudhary
+
+The team's original repository is [Rohan Gore's Realty Check](https://github.com/rohan-g0re/Realty-Check). This copy keeps its full history and both branches.
