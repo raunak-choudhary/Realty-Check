@@ -1,10 +1,25 @@
-# Realty Check
+<p align="center">
+  <img src="docs/brand/realty-check-logo.png" alt="Realty Check logo" width="112">
+</p>
 
-**Realty Check is a custom agent harness that fact-checks a property listing.** The person selling writes the listing,
-and nobody checks it. Click the address on any listing page, whether it is a rental, a home for sale, a short stay or
-an office. About a minute later you see each claim that does not match, the value on record, a confidence score and
-the source that decided it. The record comes from four sources: CoStar, the Matterport 3D scan, Vexcel aerial imagery
-and the county.
+<h1 align="center">Realty Check</h1>
+
+<h3 align="center">Realty Check is a custom agent harness that fact-checks a property listing.</h3>
+
+<p align="center">
+  The person selling writes the listing, and nobody checks it. Click the address on any listing page, whether it is a rental, a home for sale, a short stay or an office. <strong>About a minute later</strong> you see each claim that does not match, the value on record, a confidence score and the source that decided it. The record comes from four sources: <strong>CoStar</strong>, the <strong>Matterport 3D scan</strong>, <strong>Vexcel aerial imagery</strong> and <strong>the county</strong>.
+</p>
+
+<p align="center">
+  Built at HackPrinceton Fall 2026 (Nov 13–15).
+</p>
+
+<h3 align="center">
+  <a href="https://www.youtube.com/watch?v=lBtpzvgc_eg">Demo Video on YouTube</a> ·
+  <a href="https://devpost.com/software/realty-check-kruw17">Devpost Submission</a>
+</h3>
+
+---
 
 <table>
   <tr>
@@ -21,10 +36,13 @@ and the county.
   </tr>
 </table>
 
-Built at HackPrinceton Fall 2026 (Nov 13–15).
+## Contents
 
-- [Demo Video on YouTube](https://www.youtube.com/watch?v=lBtpzvgc_eg)
-- [Devpost Submission](https://devpost.com/software/realty-check-kruw17)
+1. [Architecture](#architecture)
+2. [Tracks](#tracks)
+3. [Run it](#run-it)
+4. [Built with](#built-with)
+5. [Team](#team)
 
 ## Architecture
 
