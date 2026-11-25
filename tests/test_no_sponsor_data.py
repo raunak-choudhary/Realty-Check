@@ -23,11 +23,6 @@ SUFFIXES = {"st", "street", "ave", "avenue", "blvd", "boulevard", "dr", "drive",
             "pl", "place", "ct", "court", "pkwy", "pky", "parkway", "hwy", "highway", "cir", "circle", "ter", "trl"}
 
 
-# The real-listing demo pages name their real buildings on purpose. They are the one allowed exception,
-# and the reason the repo stays private.
-REAL_DEMO = "docs/demo_site/real/"
-
-
 def _index():
     root = os.environ.get("RC_PRIVATE_DIR")
     if not root:
@@ -45,8 +40,6 @@ def _files():
     except (OSError, subprocess.CalledProcessError):
         pytest.skip("git not available")
     for name in filter(None, out.splitlines()):
-        if name.startswith(REAL_DEMO):
-            continue
         path = REPO / name
         try:
             data = path.read_bytes()

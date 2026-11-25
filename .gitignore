@@ -15,7 +15,6 @@ media/
 *.png
 !extension/icons/*.png
 !tests/fixtures/public/**
-!docs/demo_site/real/img/**
 !docs/img/*.png
 iso_cwd/
 vision_cwd/

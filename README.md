@@ -23,11 +23,11 @@
 
 <table>
   <tr>
-    <td width="50%" align="center" valign="top"><img src="docs/img/gallery/1.png" alt="Live check on a Zillow listing. The side panel streams each step of the run."><br><sub>Live check on a Zillow listing. The side panel streams each step of the run.</sub></td>
-    <td width="50%" align="center" valign="top"><img src="docs/img/gallery/2.png" alt="Side panel with the final verdict, the mismatch, a confidence score and citations."><br><sub>Side panel with the final verdict, the mismatch, a confidence score and citations.</sub></td>
+    <td width="50%" align="center" valign="top"><img src="docs/img/walkthrough-04-claims-arriving.png" alt="A check in progress on a sample listing page. The side panel shows each source as it reports in."><br><sub>A check in progress on a sample listing page. The side panel shows each source as it reports in.</sub></td>
+    <td width="50%" align="center" valign="top"><img src="docs/img/walkthrough-05-result.png" alt="Side panel with the result on the sample listing: each mismatch and the source that decided it."><br><sub>Side panel with the result on the sample listing: each mismatch and the source that decided it.</sub></td>
   </tr>
   <tr>
-    <td width="50%" align="center" valign="top"><img src="docs/img/gallery/3.png" alt="Full report, landing page."><br><sub>Full report, landing page.</sub></td>
+    <td width="50%" align="center" valign="top"><img src="docs/img/walkthrough-09-full-report.png" alt="Full report for the sample listing."><br><sub>Full report for the sample listing.</sub></td>
     <td width="50%" align="center" valign="top"><img src="docs/img/gallery/4.png" alt="Listed vs. in reality. The 3D scan opens at the spot that settles the claim."><br><sub>Listed vs. in reality. The 3D scan opens at the spot that settles the claim.</sub></td>
   </tr>
   <tr>
