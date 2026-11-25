@@ -15,7 +15,6 @@ media/
 *.png
 !extension/icons/*.png
 !tests/fixtures/public/**
-!docs/demo_site/real/img/**
 !docs/architecture/*.png
 !docs/screenshots/*.png
 iso_cwd/

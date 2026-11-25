@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/screenshots/02-verdict-in-the-drawer.png" alt="Realty Check showing five mismatches on a rental listing page" width="900">
+  <img src="docs/screenshots/04-listed-vs-reality-3d.png" alt="The report comparing a listed two bedroom with a one bedroom plus den, with the 3D scan open" width="900">
 </p>
 
 ## What we built
@@ -63,10 +63,6 @@ Each check runs when you click. Lookups are cached afterwards, so checking the s
 ## What you see
 
 While the check runs, the drawer shows each source as it reports in.
-
-<p align="center">
-  <img src="docs/screenshots/01-live-check.png" alt="The drawer during a check, with a timer and one row per source" width="900">
-</p>
 
 Every mismatch carries a confidence score from 0 to 100, and one click explains where the number came from. Here two sources agree, so the score is high.
 
